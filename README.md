@@ -1,203 +1,108 @@
-# 🎮 Proyecto TechStore - Frontend III
+# 🛒 TechStore - Frontend III (Semana 6)
 
-Bienvenido a la construcción de tu primera Single Page Application (SPA) conectada a una base de datos real de videojuegos, utilizando React, React Router y la API de RAWG.
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?logo=vite&logoColor=fff)](#)
+[![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](#)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](#)
+[![Docker](https://img.shields.io/badge/Docker-2CA5E0?logo=docker&logoColor=white)](#)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)](#)
 
-## 🚀 Paso 1: Instalación desde Cero
+Repositorio oficial de la actividad de la Semana 6 para la asignatura de Desarrollo Frontend III. **TechStore** es una plataforma de e-commerce construida con arquitecturas modernas, diseñada para demostrar el manejo avanzado de estado, optimización de estilos con clases de utilidad, contenedorización y despliegue continuo en la nube.
 
-Abre tu terminal y ejecuta los siguientes comandos para inicializar el proyecto base con Vite:
+## 🚀 Arquitectura y Características Principales
 
+* **Catálogo de Productos:** Integración dinámica de datos para mostrar un inventario de artículos.
+* **Estilizado de Utilidades:** Diseño de interfaces altamente responsivas y escalables utilizando **Tailwind CSS**, manteniendo un archivo CSS global mínimo.
+* **Gestión de Estado Complejo:** Arquitectura para manejar el flujo del carrito de compras.
+* **Despliegue Automatizado:** Pipeline de CI/CD que conecta el código directamente desde GitHub hasta la red global de Vercel.
+
+## 🛠️ Stack Tecnológico
+
+* **Core:** React 18 + Vite
+* **Estilos:** Tailwind CSS
+* **Contenedores:** Docker
+* **Infraestructura Cloud:** Vercel
+* **Integración Continua:** GitHub Actions (Pruebas automáticas y versionado)
+
+## 💻 Instalación y Desarrollo Local
+
+Para trabajar en el proyecto desde tu máquina local, sigue estos pasos:
+
+1. **Clonar el repositorio:**
 ```bash
-# 1. Crear el proyecto (escribe 'y' si te pide confirmación)
-npm create vite@latest gamepedia -- --template react
+git clone [https://github.com/JosephRangel/frontend3-week6-activity.git](https://github.com/JosephRangel/frontend3-week6-activity.git)
+cd frontend3-week6-activity
+```
 
-# 2. Entrar a la carpeta recién creada
-cd gamepedia
-
-# 3. Instalar las dependencias de Node.js
+2. **Instalar dependencias:**
+```bash
 npm install
-
-# 4. Instalar React Router para la navegación entre páginas
-npm install react-router-dom
 ```
 
-## 🔑 Paso 2: Tu Credencial de Desarrollador (API Key)
-
-Para poder descargar la información de los videojuegos, necesitas una llave de acceso:
-1. Entra a [rawg.io](https://rawg.io/) y crea una cuenta gratuita.
-2. Ve a tu perfil en la esquina superior derecha y selecciona **"Get an API key"**.
-3. Copia el código que te generen y guárdalo en un lugar seguro. Lo usaremos en el Paso 5.
-
-## 🧹 Paso 3: Limpieza del Proyecto
-
-Vite nos entrega código de ejemplo que no necesitamos. Vamos a limpiar:
-1. Elimina el archivo `src/App.css`.
-2. Abre `src/index.css`, borra todo el código que trae por defecto y pega el CSS de Gamepedia brindado en clase.
-3. Abre `src/App.jsx`, borra todo y déjalo temporalmente así:
-
-```jsx
-function App() {
-  return <h1>Gamepedia en construcción</h1>
-}
-export default App;
-```
-
-## 📂 Paso 4: Estructura de Carpetas
-
-Crea la siguiente arquitectura dentro de la carpeta `src/`:
-
-```text
-src/
- ├── components/       
- │    ├── Navbar.jsx      
- │    └── GameCard.jsx 
- ├── pages/            
- │    ├── Home.jsx         
- │    ├── GameDetails.jsx  
- │    └── Favorites.jsx    
-```
-
-*(Asegúrate de que cada archivo tenga la estructura básica de un componente de React exportado por defecto `export default ComponentName`)*.
-
-## 🔗 Paso 5: Enrutamiento Principal
-
-1. Abre `src/main.jsx`. Asegúrate de importar tus estilos (`import './index.css'`) y envuelve tu `<App />` con el `<BrowserRouter>`.
-2. Ve a `src/App.jsx`, importa tus páginas y configura las `<Routes>`:
-    * `/` -> `<Home />`
-    * `/game/:id` -> `<GameDetails />`
-    * `/favorites` -> `<Favorites />`
-
-## 🔌 Paso 6: Consumo de la API (RAWG)
-
-En tu archivo `src/pages/Home.jsx`:
-1. Crea los estados locales: `games`, `isLoading`, `error`.
-2. Configura un `useEffect` con dependencias vacías `[]`.
-3. Haz un `fetch` a `https://api.rawg.io/api/games?key=TU_API_KEY_AQUI`.
-4. Utiliza el método `.map()` en tu JSX para iterar sobre la variable `games` y renderizar múltiples componentes `<GameCard />`.
-
-## 🏃‍♂️ Paso 7: Ejecutar el Proyecto
-
-Para levantar el servidor de desarrollo y ver tu catálogo de juegos en vivo:
-
+3. **Ejecutar el servidor en modo desarrollo:**
 ```bash
 npm run dev
 ```
-Abre `http://localhost:5173` en tu navegador para ver el resultado.
+La aplicación estará disponible en `http://localhost:5173`.
 
-## ☁️ Configuracion para publicar en Docker Hub
+## 🐳 Contenedores con Docker
 
-Para que GitHub Actions pueda publicar automáticamente la imagen de tu aplicación en internet, necesita tener permiso para entrar a tu cuenta de Docker Hub. Para esto, guardaremos tus credenciales de forma segura usando los "Secrets" de GitHub.
+Este proyecto está preparado para ser encapsulado en una imagen de Docker. Para manipular las imágenes y publicarlas, es necesario autenticarse previamente.
 
-### Pasos para agregar tus credenciales:
-
-1. Ve a la página principal de tu repositorio en GitHub.
-2. Haz clic en la pestaña **Settings** (⚙️ Configuración) en la parte superior.
-3. En el menú lateral izquierdo, baja hasta la sección "Security", despliega **Secrets and variables** y haz clic en **Actions**.
-4. Haz clic en el botón verde que dice **New repository secret**.
-
-Deberás repetir este proceso para crear **dos** secretos diferentes:
-
-**Primer Secreto (Tu Usuario):**
-* **Name:** Escribe exactamente `DOCKER_USERNAME` (todo en mayúsculas).
-* **Secret:** Escribe tu nombre de usuario público de Docker Hub.
-* Haz clic en **Add secret**.
-
-**Segundo Secreto (Tu Contraseña):**
-* Haz clic nuevamente en **New repository secret**.
-* **Name:** Escribe exactamente `DOCKER_PASSWORD` (todo en mayúsculas).
-* **Secret:** Escribe la contraseña real con la que inicias sesión en Docker Hub.
-* Haz clic en **Add secret**.
-
-> **Nota:** Al guardarlos como "Secrets", GitHub los encripta. Nadie (ni tú, ni el profesor, ni otros colaboradores) podrá volver a ver la contraseña en texto plano, solo el bot encargado de subir la imagen.
-
-## 🧪 Pruebas Unitarias
-
-La calidad del código se valida mediante **Vitest** y **React Testing Library**. Las pruebas cubren el ciclo de vida de los componentes, incluyendo el manejo de estados asíncronos (Carga, Éxito y Error).
-
-### Comandos de Testing
-Desde la terminal, utiliza los siguientes scripts configurados en el `package.json`:
-
+1. **Autenticación en Docker Hub:**
+   Antes de descargar o subir imágenes privadas/públicas vinculadas a tu cuenta, inicia sesión en la terminal:
 ```bash
-# Ejecutar pruebas una sola vez
-npm run test
+docker login
+```
+*(Ingresa tu nombre de usuario y contraseña o Access Token cuando se te solicite).*
 
-# Ejecutar pruebas en modo observador (ideal para desarrollo)
-npm run test:watch
-
-## 🐳 Dockerización (Despliegue)
-
-Este proyecto utiliza Docker para garantizar que la aplicación se ejecute de forma consistente en cualquier entorno. Seguimos un proceso de tres pasos para construir, ejecutar y gestionar el contenedor.
-
-### 1. Construir la Imagen
-Este comando crea una imagen optimizada que contiene el servidor Nginx y los archivos estáticos de la aplicación. Sustituye `<tu-usuario>` por tu nombre de usuario en Docker Hub.
-
+2. **Construir la imagen de producción:**
 ```bash
-docker build -t <tu-usuario>/proyecto-frontend-iii:latest .
+docker build -t techstore-app .
 ```
 
-### 2. Ejecutar el Contenedor
-Inicia la aplicación mapeando el puerto **8080** de tu computadora al puerto **80** interno del contenedor (donde escucha Nginx).
-
+3. **Ejecutar el contenedor:**
 ```bash
-docker run -d -p 8080:80 --name frontend-app <tu-usuario>/proyecto-frontend-iii:latest
+docker run -d -p 8080:80 --name techstore-container techstore-app
 ```
-* **Verificación:** Abre tu navegador en [http://localhost:8080](http://localhost:8080).
+Accede a la aplicación lista para producción en `http://localhost:8080`.
 
-### 3. Gestión y Mantenimiento
-Comandos esenciales para controlar el ciclo de vida de los contenedores en el laboratorio:
+## ☁️ Despliegue en la Nube (Vercel)
 
-```bash
-# Listar contenedores activos
-docker ps
+La aplicación está configurada para desplegarse automáticamente en Vercel cada vez que se aprueba una nueva versión. Si necesitas replicar esta configuración en un proyecto nuevo, estos son los pasos de integración:
 
-# Detener el servidor
-docker stop frontend-app
+1. **Enlace con GitHub:**
+* Crea una cuenta en Vercel e inicia sesión con GitHub.
+* Selecciona **"Add New Project"** e importa este repositorio (`frontend3-week6-activity`).
 
-# Reiniciar el contenedor previamente detenido
-docker start frontend-app
+2. **Configuración del Proyecto (Vite):**
+   Vercel detectará automáticamente que el proyecto utiliza Vite. Confirma que los ajustes sean los siguientes:
+* **Framework Preset:** Vite
+* **Build Command:** `npm run build`
+* **Output Directory:** `dist`
 
-# Eliminar el contenedor para liberar recursos
-docker rm -f frontend-app
+3. **Optimización del Pipeline (Ignorar PRs):**
+   Para evitar que Vercel consuma minutos de construcción en Pull Requests o commits intermedios, el repositorio cuenta con un archivo `vercel.json` en la raíz. Este archivo le indica a la plataforma que **solo debe desplegar** cuando detecte el commit oficial del *Release* generado por nuestro bot automatizado:
 
-# Consultar las imágenes almacenadas localmente
-docker images
+```json
+{
+  "github": {
+    "silent": true
+  },
+  "ignoreCommand": "if [ \"$VERCEL_ENV\" != \"production\" ]; then exit 0; elif git log -1 --pretty=%B | grep -q \"chore\"; then exit 1; else exit 0; fi"
+}
 ```
 
-## 🤝 Guía de Colaboración (Workflow)
+## ⚙️ Flujo de CI/CD (GitHub Actions)
 
-Para este proyecto, seguimos un flujo de trabajo profesional basado en ramas por actividad y consolidación de commits. Este método asegura que la rama `main` se mantenga limpia y sea fácil de rastrear para las herramientas de automatización.
+El repositorio mantiene estándares empresariales de integración y despliegue continuo:
 
-### 1. Creación de Rama por Actividad
-Cada tarea o práctica debe realizarse en su propia rama. Nunca trabajes directamente sobre `main`.
+* **Protección de Rama Principal:** Todo cambio en `main` debe pasar por un proceso de revisión y validación automática mediante *Pull Requests*.
+* **Validación de Código:** Cada PR dispara un *workflow* que verifica reglas de calidad y pruebas estructurales.
+* **Automatización de Releases:** Tras una fusión exitosa, nuestro bot genera automáticamente una nueva versión semántica y actualiza el registro de cambios (`CHANGELOG.md`). Una vez creado este commit de release, Vercel lo detecta y publica la aplicación en vivo.
 
-1. Asegúrate de tener la última versión de la rama principal:
-   ```bash
-   git checkout main
-   git pull origin main
-   ```
-2. Crea una rama nueva para tu actividad actual:
-   ```bash
-   git checkout -b actividad/nombre-de-la-tarea
-   ```
-
-### 2. Desarrollo y Commits
-Realiza tus cambios y crea commits con mensajes claros. Se recomienda usar el estándar de **Conventional Commits** (ej: `feat: agregar lógica de suma` o `fix: corregir error de estilo`).
-
-### 3. Pull Request (PR)
-Una vez finalizada la actividad:
-1. Sube tu rama al repositorio: `git push origin actividad/nombre-de-la-tarea`.
-2. Ve a GitHub y abre un **Pull Request** desde tu rama hacia `main`.
-3. El sistema ejecutará automáticamente los tests. Si los tests fallan, el PR no podrá ser integrado.
-
-### 4. Squash and Merge (Fusión)
-La integración de la actividad a la rama principal se realizará exclusivamente mediante **Squash and merge**.
-
-* **¿Qué es?**: Esta opción combina todos los commits de tu rama (incluyendo los de prueba o corrección de errores) en un **único commit limpio** en `main`.
-* **Beneficio**: Facilita el trabajo de *Semantic Release*, ya que cada actividad se registra como un solo cambio significativo en el historial del proyecto.
-
-### 5. Finalización
-Una vez que el PR ha sido fusionado, puedes borrar tu rama local:
-```bash
-git checkout main
-git pull origin main
-git branch -d actividad/nombre-de-la-tarea
-```
+---
+**Profesor:** Jose Antonio Rangel Reyes  
+**Credenciales:** Maestro en Ingeniería de Desarrollo de Software | Ing. en Tecnologías de la Información y Comunicación  
+**Institución:** Cesun Universidad  
+**Materia:** Desarrollo Frontend III
